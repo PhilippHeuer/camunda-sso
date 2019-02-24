@@ -1,0 +1,20 @@
+// Apply the gradle plugins
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Project Modules
+    compile project(':' + rootProject.name + '-common')
+
+    // KeycloakPrincipal
+    compileOnly group: 'org.keycloak', name: 'keycloak-servlet-filter-adapter', version: '4.8.3.Final'
+}

@@ -1,0 +1,8 @@
+// Modules
+include 'common', 'keycloak', 'keycloak-authfilter', 'keycloak-authprovider'
+
+// Root Project
+rootProject.name = 'camunda-sso'
+rootProject.children.each {
+    it.name = rootProject.name + "-" + it.name
+}

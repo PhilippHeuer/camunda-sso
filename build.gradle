@@ -1,0 +1,95 @@
+// Apply the gradle plugins
+plugins {
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+    id 'com.jfrog.bintray' version '1.8.4'
+    id 'com.jfrog.artifactory' version '4.8.1'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// Subprojects
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.jfrog.bintray'
+    apply plugin: 'com.jfrog.artifactory'
+
+    // Source Compatiblity
+    sourceCompatibility = 1.8
+
+    // Repositories
+    repositories {
+        jcenter()
+    }
+
+    // Dependency Management for Subprojects
+    dependencyManagement {
+        imports {
+            mavenBom 'org.camunda.bpm:camunda-bom:7.10.0'
+        }
+        dependencies {
+            // Java Servlet
+            dependency group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+            // Logging
+            dependency group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+            dependency group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+            // Testing
+            dependency group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+            dependency group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+
+            // Lombok
+            dependency group: 'org.projectlombok', name: 'lombok', version: '1.18.6'
+        }
+    }
+
+    // Source encoding
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    // Common Dependencies
+    plugins.withType(JavaPlugin) {
+        dependencies {
+            // Annotation processors
+            compileOnly group: 'org.projectlombok', name: 'lombok'
+            annotationProcessor group: 'org.projectlombok', name: 'lombok'
+            testCompile group: 'org.projectlombok', name: 'lombok'
+            testAnnotationProcessor group: 'org.projectlombok', name: 'lombok'
+
+            // Logging
+            compile group: 'org.slf4j', name: 'slf4j-api'
+            testCompile group: 'ch.qos.logback', name: 'logback-classic'
+
+            // Testing
+            testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api'
+            testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
+
+            // Camunda BPM
+            compileOnly group: 'org.camunda.bpm', name: 'camunda-engine'
+            compileOnly group: 'org.camunda.bpm.webapp', name: 'camunda-webapp', classifier: 'classes'
+
+            // Java Servlet
+            compileOnly group: 'javax.servlet', name: 'javax.servlet-api'
+        }
+    }
+}
+
+// Artifact Info
+project.ext {
+    groupId = 'com.github.philippheuer.camunda.sso'
+    artifactNamespace = 'philippheuer'
+    artifactName = 'sso-root'
+    artifactVersion = String.valueOf(System.getenv("CI_COMMIT_REF_NAME")).replace("v", "")
+    artifactDescription = 'Camunda SSO'
+    websiteUrl = 'https://github.com/philippheuer/camunda-sso'
+    issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
+    vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
+}

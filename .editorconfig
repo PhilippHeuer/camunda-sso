@@ -1,0 +1,21 @@
+###
+# Code Conventions
+###
+root = true
+
+## General Rules
+[*]
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Project Configuration Files
+[{package.json, .travis.yml, .gitlab-ci.yml, Jenkinsfile}]
+indent_style = space
+indent_size = 2
+
+[{*.markdown, *.md}]
+indent_style = space
+trim_trailing_whitespace = false
