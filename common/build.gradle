@@ -22,3 +22,7 @@ repositories {
 dependencies {
     
 }
+
+bintray {
+    dryRun = true
+}

@@ -18,3 +18,7 @@ dependencies {
     // KeycloakPrincipal
     compileOnly group: 'org.keycloak', name: 'keycloak-servlet-filter-adapter', version: '4.8.3.Final'
 }
+
+bintray {
+    dryRun = true
+}

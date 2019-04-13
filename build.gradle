@@ -93,3 +93,7 @@ project.ext {
     issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
     vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
 }
+
+bintray {
+    dryRun = true
+}
