@@ -1,4 +1,4 @@
-package org.camunda.bpm.webapp.impl.security.auth;
+package org.camunda.community.sso.keycloak;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +13,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.camunda.bpm.common.security.keycloak.CamundaSSOKeycloak;
-import org.camunda.bpm.sso.CamundaSSOCore;
-import org.camunda.bpm.sso.domain.SSOUser;
+import org.camunda.bpm.webapp.impl.security.auth.Authentication;
+import org.camunda.bpm.webapp.impl.security.auth.Authentications;
+import org.camunda.bpm.webapp.impl.security.auth.UserAuthentication;
+import org.camunda.community.sso.CamundaSSOCore;
+import org.camunda.community.sso.domain.SSOUser;
 import org.camunda.bpm.webapp.impl.security.SecurityActions;
 import org.camunda.bpm.webapp.impl.security.SecurityActions.SecurityAction;
 

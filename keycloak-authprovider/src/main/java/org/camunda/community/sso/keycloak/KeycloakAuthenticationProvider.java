@@ -1,10 +1,9 @@
-package org.camunda.bpm.engine.rest.security.auth.impl;
+package org.camunda.community.sso.keycloak;
 
-import org.camunda.bpm.common.security.keycloak.CamundaSSOKeycloak;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.rest.security.auth.AuthenticationProvider;
 import org.camunda.bpm.engine.rest.security.auth.AuthenticationResult;
-import org.camunda.bpm.sso.domain.SSOUser;
+import org.camunda.community.sso.domain.SSOUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

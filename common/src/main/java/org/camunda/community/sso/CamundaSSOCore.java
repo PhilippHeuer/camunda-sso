@@ -1,4 +1,4 @@
-package org.camunda.bpm.sso;
+package org.camunda.community.sso;
 
 import lombok.Data;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.BpmPlatform;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.sso.domain.SSOUser;
+import org.camunda.community.sso.domain.SSOUser;
 
 import javax.servlet.ServletRequest;
 import java.util.Optional;

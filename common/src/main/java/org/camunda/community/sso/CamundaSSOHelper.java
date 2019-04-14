@@ -1,4 +1,4 @@
-package org.camunda.bpm.sso;
+package org.camunda.community.sso;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.Tenant;
 import org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity;
 import org.camunda.bpm.engine.impl.persistence.entity.TenantEntity;
-import org.camunda.bpm.sso.domain.SSOUser;
+import org.camunda.community.sso.domain.SSOUser;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package org.camunda.bpm.common.security.keycloak;
+package org.camunda.community.sso.keycloak;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +13,8 @@ import javax.servlet.ServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.identity.User;
-import org.camunda.bpm.sso.CamundaSSOCore;
-import org.camunda.bpm.sso.domain.SSOUser;
+import org.camunda.community.sso.CamundaSSOCore;
+import org.camunda.community.sso.domain.SSOUser;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.representations.AccessToken;
 import org.keycloak.representations.AccessToken.Access;

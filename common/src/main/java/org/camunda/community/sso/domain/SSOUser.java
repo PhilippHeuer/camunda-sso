@@ -1,4 +1,4 @@
-package org.camunda.bpm.sso.domain;
+package org.camunda.community.sso.domain;
 
 import lombok.Data;
 import org.camunda.bpm.engine.identity.User;
