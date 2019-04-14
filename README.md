@@ -48,10 +48,106 @@ Link will be added here later.
 You need to install the keycloak adapter first, download the package (OpenID Connnect - Tomcat 8) from this url: http://www.keycloak.org/downloads.html
 Extract it your your tomcat's `lib` dir, in the docker container it's `/camunda/lib`.
 
+Additionally you need to place the jars for the `keycloak-servlet-filter-adapter` and `keycloak-servlet-adapter-spi` into your tomcat /lib folder.
+
 #### WebApps (Tasklist, Cockpit, Admin)
 
-*Added later*
+*webapps/camunda/lib*
+
+Place the following jars into the library folder:
+
+- camunda-sso-common
+- camunda-sso-keycloak
+- camunda-sso-keycloak-authfilter
+
+You can download them here: https://dl.bintray.com/philippheuer/maven/com/github/philippheuer/camunda/sso/ or directly using jcenter.
+
+*webapps/camunda/WEB-INF/web.xml*
+
+Add the following section above the SecurityFilter section:
+
+```xml
+<!-- KeyCloak OpenID Connect Filter -->
+  <filter>
+    <filter-name>KeyCloak OpenID Connect Filter</filter-name>
+    <filter-class>org.keycloak.adapters.servlet.KeycloakOIDCFilter</filter-class>
+    <init-param>
+	    <param-name>keycloak.config.file</param-name>
+	    <param-value>/app/conf/keycloak.json</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>KeyCloak OpenID Connect Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  
+  <!-- Keycloak Authentication Filter -->
+  <filter>
+    <filter-name>Authentication Filter</filter-name>
+	<filter-class>org.camunda.community.sso.keycloak.KeycloakAuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Authentication Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+```
+
+Make sure to replace the `keycloak.config.file` with the path to your config file.
 
 #### Engine-REST (API)
 
-*Added later*
+*webapps/engine-rest/lib*
+
+Place the following jars into the library folder:
+
+- camunda-sso-common
+- camunda-sso-keycloak
+- camunda-sso-keycloak-authprovider
+
+You can download them here: https://dl.bintray.com/philippheuer/maven/com/github/philippheuer/camunda/sso/ or directly using jcenter.
+
+`engine-rest/lib`
+
+*webapps/engine-rest/WEB-INF/web.xml*
+
+Add the following section above the RestEasy section:
+
+```xml
+<!-- KeyCloak OpenID Connect Filter -->
+  <filter>
+    <filter-name>KeyCloak OpenID Connect Filter</filter-name>
+    <filter-class>org.keycloak.adapters.servlet.KeycloakOIDCFilter</filter-class>
+    <init-param>
+	    <param-name>keycloak.config.file</param-name>
+	    <param-value>/app/conf/keycloak.json</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>KeyCloak OpenID Connect Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <!-- Keycloak Authentication Filter -->
+  <filter>
+    <filter-name>camunda-auth</filter-name>
+    <filter-class>org.camunda.bpm.engine.rest.security.auth.ProcessEngineAuthenticationFilter</filter-class>
+    <init-param>
+      <param-name>authentication-provider</param-name>
+      <param-value>org.camunda.community.sso.keycloak.KeycloakAuthenticationProvider</param-value>
+    </init-param>
+    <init-param>
+		<param-name>rest-url-pattern-prefix</param-name>
+		<param-value></param-value>
+	</init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>camunda-auth</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- /End Keycloak Authentication Filter -->
+```
+
+Make sure to replace the `keycloak.config.file` with the path to your config file.
