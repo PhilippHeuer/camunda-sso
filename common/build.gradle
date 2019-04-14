@@ -23,6 +23,17 @@ dependencies {
     
 }
 
-bintray {
-    dryRun = true
+// Artifact Info
+project.ext {
+    groupId = 'com.github.philippheuer.camunda.sso'
+    artifactNamespace = 'philippheuer'
+    artifactName = 'sso-common'
+    artifactVersion = String.valueOf(System.getenv("CI_COMMIT_REF_NAME")).replace("v", "")
+    artifactDescription = 'Camunda SSO - Common'
+    websiteUrl = 'https://github.com/philippheuer/camunda-sso'
+    issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
+    vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
 }
+
+// Deployment Script
+apply from: '../deployment.gradle'
