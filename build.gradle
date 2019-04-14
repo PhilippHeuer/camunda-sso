@@ -1,8 +1,8 @@
 // Apply the gradle plugins
 plugins {
     id 'io.spring.dependency-management' version '1.0.6.RELEASE'
-    id 'com.jfrog.bintray' version '1.8.4'
-    id 'com.jfrog.artifactory' version '4.8.1'
+    id 'com.jfrog.bintray' version '1.8.4' apply false
+    id 'com.jfrog.artifactory' version '4.8.1' apply false
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -82,18 +82,17 @@ subprojects {
     }
 }
 
-// Artifact Info
-project.ext {
-    groupId = 'com.github.philippheuer.camunda.sso'
-    artifactNamespace = 'philippheuer'
-    artifactName = 'sso-root'
-    artifactVersion = String.valueOf(System.getenv("CI_COMMIT_REF_NAME")).replace("v", "")
-    artifactDescription = 'Camunda SSO'
-    websiteUrl = 'https://github.com/philippheuer/camunda-sso'
-    issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
-    vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
-}
-
-bintray {
-    dryRun = true
+// Allprojects
+allprojects {
+    // Artifact Info
+    project.ext {
+        groupId = 'com.github.philippheuer.camunda.sso'
+        artifactNamespace = 'philippheuer'
+        artifactName = 'camunda-sso-root'
+        artifactVersion = String.valueOf(System.getenv("CI_COMMIT_REF_NAME")).replace("v", "")
+        artifactDescription = 'Camunda SSO'
+        websiteUrl = 'https://github.com/philippheuer/camunda-sso'
+        issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
+        vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
+    }
 }

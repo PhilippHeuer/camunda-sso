@@ -21,14 +21,8 @@ dependencies {
 
 // Artifact Info
 project.ext {
-    groupId = 'com.github.philippheuer.camunda.sso'
-    artifactNamespace = 'philippheuer'
-    artifactName = 'sso-keycloak'
-    artifactVersion = String.valueOf(System.getenv("CI_COMMIT_REF_NAME")).replace("v", "")
+    artifactName = 'camunda-sso-keycloak'
     artifactDescription = 'Camunda SSO - Keycloak'
-    websiteUrl = 'https://github.com/philippheuer/camunda-sso'
-    issueTrackerUrl = 'https://github.com/philippheuer/camunda-sso/issues'
-    vcsUrl = 'https://github.com/philippheuer/camunda-sso.git'
 }
 
 // Deployment Script
